@@ -40,10 +40,13 @@ class WarehouseTest {
         assertEquals(false, w.addProduct(p2));
     }
 
-//    @Test
-//    void addProductWithRatingLowerOrEquals10ReturnTrue() {
-//        Product p = new Product(0, "Motorcycle", Category.VEHICLES, 10, new Date(), new Date());
-//        Warehouse w = new Warehouse();
-//        assertEquals(true, w.addProduct(p));
-//    }
+    @Test
+    void addProductWithNegativeRatingReturnFalse() {
+        Product p1 = new Product(0, "Motorcycle", Category.VEHICLES, -1, new Date(), new Date());
+        Product p2 = new Product(0, "Car", Category.VEHICLES, -6, new Date(), new Date());
+        Warehouse w = new Warehouse();
+        assertEquals(false, w.addProduct(p1));
+        assertEquals(false, w.addProduct(p2));
+    }
+
 }

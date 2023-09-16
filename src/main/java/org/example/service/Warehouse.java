@@ -17,7 +17,7 @@ public class Warehouse {
     public Object addProduct(Product p) {
         if (p == null || p.name().isEmpty())
             return false;
-        if (p.rating() > 10)
+        if (p.rating() < 0 || p.rating() > 10)
             return false;
 
         return true;
