@@ -11,23 +11,39 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class WarehouseTest {
 
     @Test
-    void givenProductWithEmptyNameReturnFalse() {
+    void addProductWithEmptyNameReturnFalse() {
         Product p = new Product(0, "", Category.VEHICLES, 0, new Date(), new Date());
         Warehouse w = new Warehouse();
         assertEquals(false, w.addProduct(p));
     }
 
     @Test
-    void givenProductWithNullReferenceReturnFalse() {
+    void addProductWithNullReferenceReturnFalse() {
         Product p = null;
         Warehouse w = new Warehouse();
         assertEquals(false, w.addProduct(p));
     }
 
     @Test
-    void givenProductWithANameNotEmptyReturnTrue() {
+    void addProductWithANameNotEmptyReturnTrue() {
         Product p = new Product(0, "Motorcycle", Category.VEHICLES, 0, new Date(), new Date());
         Warehouse w = new Warehouse();
         assertEquals(true, w.addProduct(p));
     }
+
+    @Test
+    void addProductWithRatingHigherThan10ReturnFalse() {
+        Product p1 = new Product(0, "Motorcycle", Category.VEHICLES, 11, new Date(), new Date());
+        Product p2 = new Product(0, "Car", Category.VEHICLES, 13, new Date(), new Date());
+        Warehouse w = new Warehouse();
+        assertEquals(false, w.addProduct(p1));
+        assertEquals(false, w.addProduct(p2));
+    }
+
+//    @Test
+//    void addProductWithRatingLowerOrEquals10ReturnTrue() {
+//        Product p = new Product(0, "Motorcycle", Category.VEHICLES, 10, new Date(), new Date());
+//        Warehouse w = new Warehouse();
+//        assertEquals(true, w.addProduct(p));
+//    }
 }
