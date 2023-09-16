@@ -24,4 +24,10 @@ class WarehouseTest {
         assertEquals(false, w.addProduct(p));
     }
 
+    @Test
+    void givenProductWithANameNotEmptyReturnTrue() {
+        Product p = new Product(0, "Motorcycle", Category.VEHICLES, 0, new Date(), new Date());
+        Warehouse w = new Warehouse();
+        assertEquals(true, w.addProduct(p));
+    }
 }
