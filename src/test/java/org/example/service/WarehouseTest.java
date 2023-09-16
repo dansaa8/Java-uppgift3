@@ -49,4 +49,15 @@ class WarehouseTest {
         assertEquals(false, w.addProduct(p2));
     }
 
+    @Test
+    void addProductWithRatingBetween0And10ReturnTrue() {
+        Product p1 = new Product(0, "Motorcycle", Category.VEHICLES, 0, new Date(), new Date());
+        Product p2 = new Product(0, "Boat", Category.VEHICLES, 4, new Date(), new Date());
+        Product p3 = new Product(0, "Car", Category.VEHICLES, 10, new Date(), new Date());
+        Warehouse w = new Warehouse();
+        assertEquals(true, w.addProduct(p1));
+        assertEquals(true, w.addProduct(p2));
+        assertEquals(true, w.addProduct(p3));
+    }
+
 }
