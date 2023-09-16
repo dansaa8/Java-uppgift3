@@ -17,11 +17,11 @@ class WarehouseTest {
         assertEquals(false, w.addProduct(p));
     }
 
-//    @Test
-//    void addProduct() {
-//        Product p = new Product(0, "Motorcycle", Category.VEHICLES, 0, new Date(), new Date());
-//        Warehouse w = new Warehouse();
-//        assertEquals(w.addProduct("Motorcycle"), true);
-//    }
+    @Test
+    void givenProductWithNullReferenceReturnFalse() {
+        Product p = null;
+        Warehouse w = new Warehouse();
+        assertEquals(false, w.addProduct(p));
+    }
 
 }

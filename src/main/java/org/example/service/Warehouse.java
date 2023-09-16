@@ -15,7 +15,7 @@ public class Warehouse {
 
 
     public Object addProduct(Product p) {
-        if (p.name().isEmpty())
+        if (p == null || p.name().isEmpty())
             return false;
         return true;
     }
