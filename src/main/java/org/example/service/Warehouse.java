@@ -16,18 +16,15 @@ public class Warehouse {
     }
 
 
-    public Object addProduct(Product p) {
-        if (p == null)
-            return false;
-
+    public boolean addProduct(Product p) {
         if (isValid(p) && !nameExists(products, p)) {
             products.add(p);
-            System.out.println(products);
             return true;
         }
 
         return false;
-
-
     }
+
+//    public boolean modifyProduct(Product p) {
+//    }
 }

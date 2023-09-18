@@ -6,6 +6,8 @@ public final class Utils {
     private Utils() {}
 
     public static boolean isValid(Product p) {
+        if (p == null) return false;
+
         return isInRange(p.rating()) &&
                 !isNullOrEmpty(p.name()) &&
                 p.id() >= 0;
