@@ -8,10 +8,10 @@ import java.util.*;
 import static org.example.entities.Utils.*;
 
 public class Warehouse {
-    private final Map<Integer, Product> products;
+    private final List<Product> products;
 
     public Warehouse() {
-        this.products = new HashMap<>();
+        this.products = new ArrayList<>();
     }
 
 
@@ -19,12 +19,11 @@ public class Warehouse {
         if (p == null)
             return false;
 
-        boolean isKeyExists = products.keySet().stream().anyMatch(id -> id == p.id());
+        boolean exists = products.stream()
+                .anyMatch(product -> product.id() == (p.id()));
 
-        if (isKeyExists) return false;
-
-        if (isValid(p)) {
-            products.put(p.id(), p);
+        if (isValid(p) && !exists) {
+            products.add(p);
             System.out.println(products);
             return true;
         }
