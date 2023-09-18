@@ -4,6 +4,7 @@ import org.example.entities.Product;
 import org.example.entities.Utils;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 import static org.example.entities.Utils.*;
 
@@ -19,10 +20,13 @@ public class Warehouse {
         if (p == null)
             return false;
 
-        boolean exists = products.stream()
-                .anyMatch(product -> product.id() == (p.id()));
 
-        if (isValid(p) && !exists) {
+        boolean nameExists = products.stream()
+                .anyMatch(product ->
+                        product.name().equalsIgnoreCase(p.name())
+                );
+
+        if (isValid(p) && !nameExists) {
             products.add(p);
             System.out.println(products);
             return true;

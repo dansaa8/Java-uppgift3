@@ -75,21 +75,12 @@ class WarehouseTest {
     }
 
     @Test
-    void addProdWithSameIDReturnFalse() {
-        Product p1 = new Product(1, "Bird", Category.ANIMALS, 3, new Date(), new Date());
-        Product p2 = new Product(1, "Elephant", Category.ANIMALS, 3, new Date(), new Date());
+    void addProdWithTheSameNameReturnFalse() {
+        Product p1 = new Product(1, "Bird", Category.ANIMALS, 5, new Date(), new Date());
+        Product p2 = new Product(2, "birD", Category.ANIMALS, 3, new Date(), new Date());
         Warehouse w = new Warehouse();
         assertEquals(true, w.addProduct(p1));
         assertEquals(false, w.addProduct(p2));
     }
-
-//    @Test
-//    void addProdWithTheSameNameReturnFalse() {
-//        Product p1 = new Product(1, "Bird", Category.ANIMALS, 5, new Date(), new Date());
-//        Product p2 = new Product(2, "birD", Category.ANIMALS, 3, new Date(), new Date());
-//        Warehouse w = new Warehouse();
-//        assertEquals(true, w.addProduct(p1));
-//        assertEquals(true, w.addProduct(p2));
-//    }
 
 }
