@@ -3,15 +3,15 @@ package org.example.service;
 import org.example.entities.Product;
 import org.example.entities.Utils;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
+import static org.example.entities.Utils.*;
 
 public class Warehouse {
-    private final Set<Product> products;
+    private final Map<Integer, Product> products;
 
     public Warehouse() {
-        this.products = new HashSet<>();
+        this.products = new HashMap<>();
     }
 
 
@@ -19,7 +19,18 @@ public class Warehouse {
         if (p == null)
             return false;
 
-        return Utils.isValid(p);
+        boolean isKeyExists = products.keySet().stream().anyMatch(id -> id == p.id());
+
+        if (isKeyExists) return false;
+
+        if (isValid(p)) {
+            products.put(p.id(), p);
+            System.out.println(products);
+            return true;
+        }
+
+        return false;
+
 
     }
 }

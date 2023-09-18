@@ -16,4 +16,5 @@ public final class Utils {
     private static boolean isNullOrEmpty(String string) {
         return string == null || string.isEmpty();
     }
+
 }
