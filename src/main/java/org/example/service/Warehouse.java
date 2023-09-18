@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.entities.Product;
+import org.example.entities.Utils;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,11 +16,10 @@ public class Warehouse {
 
 
     public Object addProduct(Product p) {
-        if (p == null || p.name().isEmpty())
-            return false;
-        if (p.rating() < 0 || p.rating() > 10)
+        if (p == null)
             return false;
 
-        return true;
+        return Utils.isValid(p);
+
     }
 }
