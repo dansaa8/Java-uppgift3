@@ -25,6 +25,11 @@ public class Warehouse {
         return false;
     }
 
-//    public boolean modifyProduct(Product p) {
-//    }
+    public boolean modifyProduct(Product p) {
+        if (isValid(p) && nameExists(products, p)) {
+
+        }
+
+        return false;
+    }
 }

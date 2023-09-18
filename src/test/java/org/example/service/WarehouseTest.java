@@ -83,17 +83,19 @@ class WarehouseTest {
         assertEquals(false, w.addProduct(p2));
     }
 
-//    @Test
-//    void modifyNullReferenceReturnFalse() {
-//        Product p = null;
-//        Warehouse w = new Warehouse();
-//        assertEquals(false, w.modifyProduct(p));
-//    }
-//    void modifyNonExistingObjectReturnFalse() {
-//        Product p1 = new Product(1, "hoRsE", Category.ANIMALS, 5, new Date(), new Date());
-//        Warehouse w = new Warehouse();
-//        assertEquals(false, w.modifyProduct(p1));
-//    }
+    @Test
+    void modifyNullProductReturnFalse() {
+        Product p = null;
+        Warehouse w = new Warehouse();
+        assertEquals(false, w.modifyProduct(p));
+    }
+
+    @Test
+    void modifyNonExistingProductReturnFalse() {
+        Product p = new Product(1, "hoRsE", Category.ANIMALS, 5, new Date(), new Date());
+        Warehouse w = new Warehouse();
+        assertEquals(false, w.modifyProduct(p));
+    }
 
 //    void modifyExistingObjectReturnTrue() {
 //        Product p1 = new Product(1, "hoRsE", Category.ANIMALS, 5, new Date(), new Date());
