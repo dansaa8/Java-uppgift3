@@ -61,8 +61,17 @@ class WarehouseTest {
     }
 
     @Test
-    void getAllProducts() {
+    void addProdWithNegIdReturnFalse() {
+        Product p1 = new Product(-1, "Cat", Category.ANIMALS, 2, new Date(), new Date());
+        Warehouse w = new Warehouse();
+        assertEquals(false, w.addProduct(p1));
+    }
 
+    @Test
+    void addProdWithPosIdReturnTrue() {
+        Product p1 = new Product(2, "Cat", Category.ANIMALS, 2, new Date(), new Date());
+        Warehouse w = new Warehouse();
+        assertEquals(true, w.addProduct(p1));
     }
 
 }
