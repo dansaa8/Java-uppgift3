@@ -27,7 +27,7 @@ public class Warehouse {
 
     public boolean modifyProduct(Product p) {
         if (isValid(p) && nameExists(products, p)) {
-
+            return true;
         }
 
         return false;

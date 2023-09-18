@@ -97,9 +97,14 @@ class WarehouseTest {
         assertEquals(false, w.modifyProduct(p));
     }
 
-//    void modifyExistingObjectReturnTrue() {
-//        Product p1 = new Product(1, "hoRsE", Category.ANIMALS, 5, new Date(), new Date());
-//        Product p2 = new Product(1, "HOrSE", Category.VEHICLES, 3, new Date(), new Date());
-//    }
+    @Test
+    void modifyExistingObjectReturnTrue() {
+        Product p1 = new Product(1, "hoRsE", Category.ANIMALS, 5, new Date(), new Date());
+        Product p2 = new Product(1, "HOrSE", Category.VEHICLES, 3, new Date(), new Date());
+        Warehouse w = new Warehouse();
+
+        w.addProduct(p1);
+        assertEquals(true, w.modifyProduct(p2));
+    }
 
 }
