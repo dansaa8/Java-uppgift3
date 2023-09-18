@@ -21,7 +21,6 @@ public class Warehouse {
             products.add(p);
             return true;
         }
-
         return false;
     }
 
@@ -31,5 +30,9 @@ public class Warehouse {
         }
 
         return false;
+    }
+
+    public List<Product> getAllProducts() {
+        return Collections.unmodifiableList(products);
     }
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WarehouseTest {
@@ -105,6 +106,23 @@ class WarehouseTest {
 
         w.addProduct(p1);
         assertEquals(true, w.modifyProduct(p2));
+    }
+
+    @Test
+    void getUnmodifiableListOfProductsThatWereAddedToTheList() {
+        Warehouse w = new Warehouse();
+        Product p1 = new Product(4, "Cow", Category.ANIMALS, 5, new Date(), new Date());
+        Product p2 = new Product(1, "Airplane", Category.VEHICLES, 3, new Date(), new Date());
+        Product p3 = new Product(2, "Jeans", Category.CLOTHES, 0, new Date(), new Date());
+        w.addProduct(p1);
+        w.addProduct(p2);
+        w.addProduct(p3);
+
+        assertThat(w.getAllProducts())
+                .as("Should contain the three objects added above as an unmodifiable list")
+                .hasSize(3)
+                .contains(p1, p2, p3)
+                .isUnmodifiable();
     }
 
 }
