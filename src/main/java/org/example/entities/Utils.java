@@ -12,7 +12,7 @@ public final class Utils {
     }
 
     private static boolean isInRange(int rating) {
-        return rating > 0 && rating <= 10;
+        return rating >= 0 && rating <= 10;
     }
 
     private static boolean isNegative(int id) {
