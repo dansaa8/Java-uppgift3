@@ -20,13 +20,7 @@ public class Warehouse {
         if (p == null)
             return false;
 
-
-        boolean nameExists = products.stream()
-                .anyMatch(product ->
-                        product.name().equalsIgnoreCase(p.name())
-                );
-
-        if (isValid(p) && !nameExists) {
+        if (isValid(p) && !nameExists(products, p)) {
             products.add(p);
             System.out.println(products);
             return true;
