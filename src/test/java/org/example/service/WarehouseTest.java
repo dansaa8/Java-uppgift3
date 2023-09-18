@@ -125,4 +125,13 @@ class WarehouseTest {
                 .isUnmodifiable();
     }
 
+    @Test
+    void getAnEmptyModifiableList() {
+        Warehouse w = new Warehouse();
+        assertThat(w.getAllProducts())
+                .as("Should return an empty list of no objects have been added")
+                .isUnmodifiable()
+                .isEmpty();
+    }
+
 }

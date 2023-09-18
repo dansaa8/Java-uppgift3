@@ -28,7 +28,6 @@ public class Warehouse {
         if (isValid(p) && nameExists(products, p)) {
             return true;
         }
-
         return false;
     }
 
