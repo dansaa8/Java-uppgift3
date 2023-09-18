@@ -60,4 +60,9 @@ class WarehouseTest {
         assertEquals(true, w.addProduct(p3));
     }
 
+    @Test
+    void getAllProducts() {
+
+    }
+
 }
