@@ -139,8 +139,18 @@ class WarehouseTest {
         Warehouse w = new Warehouse();
         Product p1 = new Product(4, "Cow", Category.ANIMALS, 5, new Date(), new Date());
         Product p2 = new Product(1, "Airplane", Category.VEHICLES, 3, new Date(), new Date());
-        Product p3 = new Product(2, "Jeans", Category.CLOTHES, 0, new Date(), new Date());
-        assertThat(w.getProduct(id))
+        Product p3 = new Product(2, "Jeans", Category.CLOTHES, 7, new Date(), new Date());
+        Product p4 = new Product(5, "Shirt", Category.CLOTHES, 5, new Date(), new Date());
+
+        w.addProduct(p1);
+        w.addProduct(p2);
+        w.addProduct(p3);
+        w.addProduct(p4);
+
+        assertThat(w.getProduct(2))
+                .as("Should return optional containing object p3")
+                .isPresent()
+                .contains(p3);
     }
 
 }
