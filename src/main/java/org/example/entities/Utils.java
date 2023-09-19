@@ -28,4 +28,11 @@ public final class Utils {
                 );
     }
 
+    public static Product findProduct(List<Product> pList, int id) {
+        return pList.stream()
+                .filter(p -> p.id() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
 }

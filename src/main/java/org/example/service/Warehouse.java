@@ -32,10 +32,7 @@ public class Warehouse {
     }
 
     public Optional<Product> getProduct(int id) {
-        return Optional.ofNullable(products.stream()
-                .filter(p -> p.id() == id)
-                .findFirst()
-                .orElse(null));
+        return Optional.ofNullable(findProduct(products, id));
     }
 
     public List<Product> getAllProducts() {
