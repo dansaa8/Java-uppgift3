@@ -134,4 +134,13 @@ class WarehouseTest {
                 .isEmpty();
     }
 
+    @Test
+    void getProductWithProductID() {
+        Warehouse w = new Warehouse();
+        Product p1 = new Product(4, "Cow", Category.ANIMALS, 5, new Date(), new Date());
+        Product p2 = new Product(1, "Airplane", Category.VEHICLES, 3, new Date(), new Date());
+        Product p3 = new Product(2, "Jeans", Category.CLOTHES, 0, new Date(), new Date());
+        assertThat(w.getProduct(id))
+    }
+
 }

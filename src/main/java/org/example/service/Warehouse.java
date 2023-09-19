@@ -31,6 +31,10 @@ public class Warehouse {
         return false;
     }
 
+    public Optional<Product> getProduct(int id) {
+
+    }
+
     public List<Product> getAllProducts() {
         return Collections.unmodifiableList(products);
     }
