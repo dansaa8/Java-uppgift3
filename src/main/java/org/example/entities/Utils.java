@@ -5,7 +5,7 @@ import java.util.List;
 public final class Utils {
     private Utils() {}
 
-    public static boolean isValid(Product p) {
+    public static boolean isValid(ProductRecord p) {
         if (p == null) return false;
 
         return isInRange(p.rating()) &&
@@ -24,14 +24,15 @@ public final class Utils {
     public static boolean nameExists(List<Product> pList, Product p) {
         return pList.stream()
                 .anyMatch(product ->
-                        product.name().equalsIgnoreCase(p.name())
+                        product.getName().equalsIgnoreCase(p.getName())
                 );
     }
 
-    public static Product findProduct(List<Product> pList, int id) {
+    public static ProductRecord findProduct(List<Product> pList, int id) {
         return pList.stream()
-                .filter(p -> p.id() == id)
+                .filter(p -> p.getId() == id)
                 .findFirst()
+                .map(ProductRecord::new)
                 .orElse(null);
     }
 
