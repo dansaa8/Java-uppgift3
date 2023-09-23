@@ -21,10 +21,10 @@ public final class Utils {
         return string == null || string.isEmpty();
     }
 
-    public static boolean nameExists(List<Product> pList, Product p) {
+    public static boolean nameExists(List<Product> pList, ProductRecord p) {
         return pList.stream()
                 .anyMatch(product ->
-                        product.getName().equalsIgnoreCase(p.getName())
+                        product.getName().equalsIgnoreCase(p.name())
                 );
     }
 

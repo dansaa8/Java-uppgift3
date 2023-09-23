@@ -84,29 +84,29 @@ class WarehouseTest {
         assertEquals(false, w.addProduct(p2));
     }
 
-//    @Test
-//    void modifyNullProductReturnFalse() {
-//        ProductRecord p = null;
-//        Warehouse w = new Warehouse();
-//        assertEquals(false, w.modifyProduct(p));
-//    }
-//
-//    @Test
-//    void modifyNonExistingProductReturnFalse() {
-//        ProductRecord p = new ProductRecord(1, "hoRsE", Category.ANIMALS, 5, new Date(), new Date());
-//        Warehouse w = new Warehouse();
-//        assertEquals(false, w.modifyProduct(p));
-//    }
-//
-//    @Test
-//    void modifyExistingObjectReturnTrue() {
-//        ProductRecord p1 = new ProductRecord(1, "hoRsE", Category.ANIMALS, 5, new Date(), new Date());
-//        ProductRecord p2 = new ProductRecord(1, "HOrSE", Category.VEHICLES, 3, new Date(), new Date());
-//        Warehouse w = new Warehouse();
-//
-//        w.addProduct(p1);
-//        assertEquals(true, w.modifyProduct(p2));
-//    }
+    @Test
+    void modifyNullProductReturnFalse() {
+        ProductRecord p = null;
+        Warehouse w = new Warehouse();
+        assertEquals(false, w.modifyProduct(p));
+    }
+
+    @Test
+    void modifyNonExistingProductReturnFalse() {
+        ProductRecord p = new ProductRecord(1, "hoRsE", Category.ANIMALS, 5, new Date(), new Date());
+        Warehouse w = new Warehouse();
+        assertEquals(false, w.modifyProduct(p));
+    }
+
+    @Test
+    void modifyExistingObjectReturnTrue() {
+        ProductRecord p1 = new ProductRecord(1, "hoRsE", Category.ANIMALS, 5, new Date(), new Date());
+        ProductRecord p2 = new ProductRecord(1, "HOrSE", Category.VEHICLES, 3, new Date(), new Date());
+        Warehouse w = new Warehouse();
+
+        w.addProduct(p1);
+        assertEquals(true, w.modifyProduct(p2));
+    }
 
     @Test
     void getUnmodifiableListOfProductsThatWereAddedToTheList() {
