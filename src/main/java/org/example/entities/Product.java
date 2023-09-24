@@ -1,6 +1,6 @@
 package org.example.entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.*;
 
 public final class Product {
@@ -8,10 +8,10 @@ public final class Product {
     private String name;
     private Category category;
     private int rating;
-    private final LocalDateTime createdAt;
-    private LocalDateTime lastModified;
+    private final LocalDate createdAt;
+    private LocalDate lastModified;
 
-    public Product(int id, String name, Category category, int rating, LocalDateTime createdAt, LocalDateTime lastModified) {
+    public Product(int id, String name, Category category, int rating, LocalDate createdAt, LocalDate lastModified) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -56,11 +56,11 @@ public final class Product {
         return rating;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public LocalDateTime getLastModified() {
+    public LocalDate getLastModified() {
         return lastModified;
     }
 
@@ -76,7 +76,7 @@ public final class Product {
         this.rating = rating;
     }
 
-    public void setLastModified(LocalDateTime lastModified) {
+    public void setLastModified(LocalDate lastModified) {
         this.lastModified = lastModified;
     }
 

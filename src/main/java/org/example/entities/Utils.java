@@ -1,6 +1,6 @@
 package org.example.entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public final class Utils {
@@ -47,12 +47,22 @@ public final class Utils {
             prodUpdate.setName(p.name());
             prodUpdate.setCategory(p.category());
             prodUpdate.setRating(p.rating());
-            prodUpdate.setLastModified(LocalDateTime.now());
+            prodUpdate.setLastModified(LocalDate.now());
 
             return true;
         }
 
         return false;
+    }
+
+    public static boolean filterByDateType(Product product, DateTimeField dateTimeField, LocalDate targetDate) {
+        return switch (dateTimeField) {
+            case CREATED_AT -> product.getCreatedAt().isAfter(targetDate);
+            case LAST_MODIFIED -> product.getLastModified().isAfter(targetDate);
+            default ->
+                // Handle the case when dateType is something else
+                    false;
+        };
     }
 
 }

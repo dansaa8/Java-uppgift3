@@ -1,10 +1,11 @@
 package org.example.service;
 
 import org.example.entities.Category;
+import org.example.entities.DateTimeField;
 import org.example.entities.Product;
 import org.example.entities.ProductRecord;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -37,19 +38,25 @@ public class Warehouse {
     public List<ProductRecord> getAllProducts() {
         List<ProductRecord> prodRecords = products.stream()
                 .map(ProductRecord::new)
-                        .collect(Collectors.toList());
+                .collect(Collectors.toList());
         System.out.println(prodRecords);
 
         return Collections.unmodifiableList(prodRecords);
     }
 
     public List<ProductRecord> getAllProducts(Category category) {
-        List<ProductRecord> prodRecords = products.stream()
+        return products.stream()
                 .filter(product -> product.getCategory() == category)
                 .map(ProductRecord::new)
                 .sorted(Comparator.comparing(ProductRecord::name))
-                .collect(Collectors.toList());
-        return Collections.unmodifiableList(prodRecords);
+                .toList();
     }
 
+    public List<ProductRecord> getAllProducts(DateTimeField dateTimeField, LocalDate targetDate) {
+        return products.stream()
+                .filter(product -> filterByDateType(product, dateTimeField, targetDate))
+                .map(ProductRecord::new)
+                .sorted(Comparator.comparing(ProductRecord::createdAt))
+                .collect(Collectors.toList());
+    }
 }
