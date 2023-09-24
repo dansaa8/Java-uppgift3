@@ -1,8 +1,9 @@
 package org.example.entities;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
-public record ProductRecord(int id, String name, Category category, int rating, Date createdAt, Date lastModified) {
+public record ProductRecord(int id, String name, Category category, int rating, LocalDateTime createdAt, LocalDateTime lastModified) {
 
 
     public ProductRecord(Product other) {
@@ -38,6 +39,17 @@ public record ProductRecord(int id, String name, Category category, int rating, 
                 "lastModified=" + lastModified + ']';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductRecord that = (ProductRecord) o;
+        return id == that.id && rating == that.rating && Objects.equals(name, that.name) && category == that.category;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, category, rating);
+    }
 }
 

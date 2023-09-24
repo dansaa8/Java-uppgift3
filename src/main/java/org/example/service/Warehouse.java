@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.entities.Product;
 import org.example.entities.ProductRecord;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,10 +26,7 @@ public class Warehouse {
     }
 
     public boolean modifyProduct(ProductRecord p) {
-        if (isValid(p) && nameExists(products, p)) {
-            return true;
-        }
-        return false;
+        return isValid(p) && updateProduct(products, p);
     }
 
     public Optional<ProductRecord> getProduct(int id) {

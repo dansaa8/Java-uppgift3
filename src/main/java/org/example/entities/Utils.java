@@ -1,5 +1,6 @@
 package org.example.entities;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public final class Utils {
@@ -34,6 +35,24 @@ public final class Utils {
                 .findFirst()
                 .map(ProductRecord::new)
                 .orElse(null);
+    }
+
+    public static boolean updateProduct(List<Product> pList, ProductRecord p)  {
+        var foundProduct = pList.stream()
+                .filter(product -> product.getId() == p.id())
+                .findFirst();
+
+        if(foundProduct.isPresent()) {
+            var prodUpdate = foundProduct.get();
+            prodUpdate.setName(p.name());
+            prodUpdate.setCategory(p.category());
+            prodUpdate.setRating(p.rating());
+            prodUpdate.setLastModified(LocalDateTime.now());
+
+            return true;
+        }
+
+        return false;
     }
 
 }
