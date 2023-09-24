@@ -45,10 +45,11 @@ public class Warehouse {
 
     public List<ProductRecord> getAllProducts(Category category) {
         List<ProductRecord> prodRecords = products.stream()
+                .filter(product -> product.getCategory() == category)
                 .map(ProductRecord::new)
+                .sorted(Comparator.comparing(ProductRecord::name))
                 .collect(Collectors.toList());
-        System.out.println(prodRecords);
-
         return Collections.unmodifiableList(prodRecords);
     }
+
 }

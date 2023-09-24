@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.entities.Category;
+import org.example.entities.Product;
 import org.example.entities.ProductRecord;
 import org.junit.jupiter.api.Test;
 
@@ -225,7 +226,17 @@ class WarehouseTest {
                         " p6(Alligator), p2(Bear), p5(Cat), p3(Dog)")
                 .hasSize(4)
                 .containsSequence(p6, p2, p5, p3)
-                .doesNotContain(p1, p4);
+                .doesNotContain(p1, p4)
+                .isUnmodifiable();
+    }
+
+    @Test
+    public void getAllProductsWithACategoryThatDoesntExistReturnEmptyList() {
+        Warehouse w = new Warehouse();
+
+        assertThat(w.getAllProducts(Category.CLOTHES))
+                .as("Should return an empty list")
+                .isEmpty();
     }
 
 
