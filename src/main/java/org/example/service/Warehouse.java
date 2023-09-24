@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.entities.Category;
 import org.example.entities.Product;
 import org.example.entities.ProductRecord;
 
@@ -37,6 +38,15 @@ public class Warehouse {
         List<ProductRecord> prodRecords = products.stream()
                 .map(ProductRecord::new)
                         .collect(Collectors.toList());
+        System.out.println(prodRecords);
+
+        return Collections.unmodifiableList(prodRecords);
+    }
+
+    public List<ProductRecord> getAllProducts(Category category) {
+        List<ProductRecord> prodRecords = products.stream()
+                .map(ProductRecord::new)
+                .collect(Collectors.toList());
         System.out.println(prodRecords);
 
         return Collections.unmodifiableList(prodRecords);

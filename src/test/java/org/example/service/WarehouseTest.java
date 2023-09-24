@@ -136,23 +136,6 @@ class WarehouseTest {
     }
 
     @Test
-    void getUnmodifiableListOfProductsThatWereAddedToTheList() {
-        Warehouse w = new Warehouse();
-        ProductRecord p1 = new ProductRecord(4, "Cow", Category.ANIMALS, 5, LocalDateTime.now(), LocalDateTime.now());
-        ProductRecord p2 = new ProductRecord(1, "Airplane", Category.VEHICLES, 3, LocalDateTime.now(), LocalDateTime.now());
-        ProductRecord p3 = new ProductRecord(2, "Jeans", Category.CLOTHES, 0, LocalDateTime.now(), LocalDateTime.now());
-        w.addProduct(p1);
-        w.addProduct(p2);
-        w.addProduct(p3);
-
-        assertThat(w.getAllProducts())
-                .as("Should contain the three objects added above as an unmodifiable list")
-                .hasSize(3)
-//                .contains(p1, p2, p3)
-                .isUnmodifiable();
-    }
-
-    @Test
     void getAnEmptyModifiableList() {
         Warehouse w = new Warehouse();
         assertThat(w.getAllProducts())
@@ -198,5 +181,53 @@ class WarehouseTest {
                 .isEmpty()
                 .isNotPresent();
     }
+
+    @Test
+    void getUnmodifiableListOfProductsThatWereAddedToTheList() {
+        Warehouse w = new Warehouse();
+        ProductRecord p1 = new ProductRecord(4, "Cow", Category.ANIMALS, 5, LocalDateTime.now(), LocalDateTime.now());
+        ProductRecord p2 = new ProductRecord(1, "Airplane", Category.VEHICLES, 3, LocalDateTime.now(), LocalDateTime.now());
+        ProductRecord p3 = new ProductRecord(2, "Jeans", Category.CLOTHES, 0, LocalDateTime.now(), LocalDateTime.now());
+        w.addProduct(p1);
+        w.addProduct(p2);
+        w.addProduct(p3);
+
+        assertThat(w.getAllProducts())
+                .as("Should contain the three objects added above as an unmodifiable list")
+                .hasSize(3)
+//                .contains(p1, p2, p3)
+                .isUnmodifiable();
+    }
+
+    @Test
+    void getAllProductsOfASpecificCategory() {
+        Warehouse w = new Warehouse();
+        ProductRecord p1 = new ProductRecord(4, "Jeans", Category.CLOTHES, 5, LocalDateTime.now(), LocalDateTime.now());
+        ProductRecord p2 = new ProductRecord(2, "Bear", Category.ANIMALS, 7, LocalDateTime.now(), LocalDateTime.now());
+        ProductRecord p3 = new ProductRecord(3, "Dog", Category.ANIMALS, 5, LocalDateTime.now(), LocalDateTime.now());
+        ProductRecord p4 = new ProductRecord(1, "Airplane", Category.VEHICLES, 3, LocalDateTime.now(), LocalDateTime.now());
+        ProductRecord p5 = new ProductRecord(7, "Cat", Category.ANIMALS, 5, LocalDateTime.now(), LocalDateTime.now());
+        ProductRecord p6 = new ProductRecord(5, "Alligator", Category.ANIMALS, 5, LocalDateTime.now(), LocalDateTime.now());
+
+
+        w.addProduct(p1);
+        w.addProduct(p2);
+        w.addProduct(p3);
+        w.addProduct(p4);
+        w.addProduct(p5);
+        w.addProduct(p6);
+
+        Category targetType = Category.ANIMALS;
+
+        assertThat(w.getAllProducts(targetType))
+                .as("Should contain 4 products (p2, p3, p5, p6), " +
+                        "sorted in alphabetic order by name:" +
+                        " p6(Alligator), p2(Bear), p5(Cat), p3(Dog)")
+                .hasSize(4)
+                .containsSequence(p6, p2, p5, p3)
+                .doesNotContain(p1, p4);
+    }
+
+
 
 }
