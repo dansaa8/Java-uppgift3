@@ -33,7 +33,7 @@ public class ListUpdater {
     }
 
     static boolean insertIntoList(List<Product> pList, ProductRecord p) {
-        if (isValid(p) && !nameExists(pList, new ProductRecord(p))) {
+        if (isValid(p) && !nameExists(pList, p)) {
             pList.add(new Product(p));
             return true;
         }

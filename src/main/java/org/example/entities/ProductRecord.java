@@ -16,16 +16,6 @@ public record ProductRecord(int id, String name, Category category, int rating, 
                 other.getLastModified());
     }
 
-    public ProductRecord(ProductRecord other) {
-        this(
-                other.id(),
-                other.name(),
-                other.category(),
-                other.rating(),
-                other.createdAt(),
-                other.lastModified());
-    }
-
     @Override
     public String toString() {
         return "ProductRecord[" +
