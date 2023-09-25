@@ -36,12 +36,8 @@ public class Warehouse {
     }
 
     public List<ProductRecord> getAllProducts() {
-        List<ProductRecord> prodRecords = products.stream()
-                .map(ProductRecord::new)
-                .collect(Collectors.toList());
-        System.out.println(prodRecords);
-
-        return Collections.unmodifiableList(prodRecords);
+        return products.stream()
+                .map(ProductRecord::new).toList();
     }
 
     public List<ProductRecord> getAllProducts(Category category) {
