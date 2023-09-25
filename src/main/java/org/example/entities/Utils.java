@@ -1,5 +1,7 @@
 package org.example.entities;
 
+import org.example.service.DateField;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -54,15 +56,4 @@ public final class Utils {
 
         return false;
     }
-
-    public static boolean filterByDateType(Product product, DateTimeField dateTimeField, LocalDate targetDate) {
-        return switch (dateTimeField) {
-            case CREATED_AT -> product.getCreatedAt().isAfter(targetDate);
-            case LAST_MODIFIED -> product.getLastModified().isAfter(targetDate);
-            default ->
-                // Handle the case when dateType is something else
-                    false;
-        };
-    }
-
 }

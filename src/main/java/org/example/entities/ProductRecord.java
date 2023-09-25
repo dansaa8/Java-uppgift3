@@ -26,8 +26,6 @@ public record ProductRecord(int id, String name, Category category, int rating, 
                 other.lastModified());
     }
 
-
-
     @Override
     public String toString() {
         return "ProductRecord[" +

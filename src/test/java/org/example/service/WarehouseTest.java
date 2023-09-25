@@ -1,7 +1,6 @@
 package org.example.service;
 
 import org.example.entities.Category;
-import org.example.entities.DateTimeField;
 import org.example.entities.ProductRecord;
 import org.junit.jupiter.api.Test;
 
@@ -274,7 +273,7 @@ class WarehouseTest {
 
         LocalDate targetDate = LocalDate.of(2023, 5, 10);
 
-        assertThat(w.getAllProducts(DateTimeField.CREATED_AT, targetDate))
+        assertThat(w.getAllProducts(DateField.CREATED_AT, targetDate))
                 .as("Method should return all products after a give creation-date.")
                 .contains(p1, p2, p4);
     }
@@ -316,7 +315,7 @@ class WarehouseTest {
 
         LocalDate targetDate = LocalDate.of(2023, 3, 12);
 
-        assertThat(w.getAllProducts(DateTimeField.LAST_MODIFIED, targetDate))
+        assertThat(w.getAllProducts(DateField.LAST_MODIFIED, targetDate))
                 .as("Method should return all products after a give creation-date.")
                 .contains(p2, p5, p6);
     }

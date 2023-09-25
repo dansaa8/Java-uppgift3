@@ -1,7 +1,6 @@
 package org.example.service;
 
 import org.example.entities.Category;
-import org.example.entities.DateTimeField;
 import org.example.entities.Product;
 import org.example.entities.ProductRecord;
 
@@ -10,6 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.example.entities.Utils.*;
+import static org.example.service.Filters.*;
 
 public class Warehouse {
     private final List<Product> products;
@@ -40,19 +40,14 @@ public class Warehouse {
                 .map(ProductRecord::new).toList();
     }
 
-    public List<ProductRecord> getAllProducts(Category category) {
-        return products.stream()
-                .filter(product -> product.getCategory() == category)
-                .map(ProductRecord::new)
-                .sorted(Comparator.comparing(ProductRecord::name))
-                .toList();
+    public List<ProductRecord> getAllProducts(Category desiredCategory) {
+        return Filters.getProductsInCategory(products, desiredCategory);
     }
 
-    public List<ProductRecord> getAllProducts(DateTimeField dateTimeField, LocalDate targetDate) {
-        return products.stream()
-                .filter(product -> filterByDateType(product, dateTimeField, targetDate))
-                .map(ProductRecord::new)
-                .sorted(Comparator.comparing(ProductRecord::createdAt))
-                .collect(Collectors.toList());
+    public List<ProductRecord> getAllProducts(DateField desiredDateField, LocalDate targetDate) {
+        if (desiredDateField == DateField.CREATED_AT)
+            return getProductsCreatedAfterDesiredDate(products, targetDate);
+        else
+            return getProductsLastModifiedAfterDesiredDate(products,targetDate);
     }
 }
