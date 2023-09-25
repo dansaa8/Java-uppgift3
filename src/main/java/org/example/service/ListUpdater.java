@@ -19,13 +19,13 @@ public class ListUpdater {
                 .findFirst();
 
         if (foundProduct.isPresent()) {
-            updateProduct(foundProduct.get(), p);
+            updateFields(foundProduct.get(), p);
             return true;
         }
         return false;
     }
 
-    private static void updateProduct(Product oldProd, ProductRecord updatedProd) {
+    private static void updateFields(Product oldProd, ProductRecord updatedProd) {
         oldProd.setName(updatedProd.name());
         oldProd.setCategory(updatedProd.category());
         oldProd.setRating(updatedProd.rating());
