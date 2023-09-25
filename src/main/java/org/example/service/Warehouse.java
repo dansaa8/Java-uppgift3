@@ -6,10 +6,9 @@ import org.example.entities.ProductRecord;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static org.example.entities.Utils.*;
 import static org.example.service.Filters.*;
+import static org.example.service.ListUpdater.*;
 
 public class Warehouse {
     private final List<Product> products;
@@ -18,17 +17,12 @@ public class Warehouse {
         this.products = new ArrayList<>();
     }
 
-
     public boolean addProduct(ProductRecord p) {
-        if (isValid(p) && !nameExists(products, new ProductRecord(p))) {
-            products.add(new Product(p));
-            return true;
-        }
-        return false;
+        return (insertIntoList(products, p));
     }
 
     public boolean modifyProduct(ProductRecord p) {
-        return isValid(p) && updateProduct(products, p);
+        return updateProduct(products, p);
     }
 
     public Optional<ProductRecord> getProduct(int id) {
@@ -36,8 +30,7 @@ public class Warehouse {
     }
 
     public List<ProductRecord> getAllProducts() {
-        return products.stream()
-                .map(ProductRecord::new).toList();
+        return products.stream().map(ProductRecord::new).toList();
     }
 
     public List<ProductRecord> getAllProducts(Category desiredCategory) {
