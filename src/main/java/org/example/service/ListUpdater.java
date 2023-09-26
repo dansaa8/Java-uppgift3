@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.example.entities.FieldValidator.isValid;
 
-public class ListUpdater {
+class ListUpdater {
 
     static boolean updateProduct(List<Product> pList, ProductRecord p) {
         if (!isValid(p))
