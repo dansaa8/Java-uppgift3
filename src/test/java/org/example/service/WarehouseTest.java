@@ -1,10 +1,14 @@
 package org.example.service;
 
+import org.assertj.core.api.Condition;
 import org.example.entities.Category;
 import org.example.entities.ProductRecord;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -342,7 +346,7 @@ class WarehouseTest {
 
         assertThat(w.getCategories())
                 .as("List should contain following categories: ANIMALS, COMPUTERS")
-                .contains("ANIMALS", "COMPUTERS")
+                .containsSequence("ANIMALS", "COMPUTERS")
                 .hasSize(2)
                 .doesNotContain("VEHICLES", "CLOTHES");
     }
@@ -420,6 +424,93 @@ class WarehouseTest {
 
         assertThat(w.getFirstLetters())
                 .isEmpty();
+    }
+
+    @Test
+    public void getAllProductsWithMaxRatingCreatedThisMonthSortedByNewestFirst() {
+        Warehouse w = new Warehouse();
+
+        ProductRecord p1 = new ProductRecord(1, "Jeans", Category.CLOTHES, 5,
+                LocalDate.of(2023, 9, 11),
+                LocalDate.of(2023, 9, 14));
+
+        ProductRecord p2 = new ProductRecord(2, "Bear", Category.ANIMALS, 10,
+                LocalDate.of(2023, 9, 11),
+                LocalDate.of(2023, 9, 15));
+
+        ProductRecord p3 = new ProductRecord(3, "Dog", Category.ANIMALS, 10,
+                LocalDate.of(2023, 8, 10),
+                LocalDate.of(2023, 8, 12));
+
+        ProductRecord p4 = new ProductRecord(4, "Airplane", Category.VEHICLES, 3,
+                LocalDate.of(2022, 3, 9),
+                LocalDate.of(2022, 4, 18));
+
+        ProductRecord p5 = new ProductRecord(5, "Cat", Category.ANIMALS, 10,
+                LocalDate.of(2023, 9, 1),
+                LocalDate.of(2023, 9, 13));
+
+        ProductRecord p6 = new ProductRecord(6, "Alligator", Category.ANIMALS, 10,
+                LocalDate.of(2023, 9, 27),
+                LocalDate.of(2023, 9, 28));
+
+        ProductRecord p7 = new ProductRecord(7, "Dragon", Category.ANIMALS, 10,
+                LocalDate.of(2023, 2, 10),
+                LocalDate.of(2023, 3, 12));
+
+        ProductRecord p8 = new ProductRecord(8, "Dell", Category.COMPUTERS, 10,
+                LocalDate.of(2023, 9, 10),
+                LocalDate.of(2023, 9, 12));
+
+        ProductRecord p9 = new ProductRecord(9, "Jetplane", Category.VEHICLES, 5,
+                LocalDate.of(2023, 9, 10),
+                LocalDate.of(2023, 9, 12));
+
+        w.addProduct(p1);
+        w.addProduct(p2);
+        w.addProduct(p3);
+        w.addProduct(p4);
+        w.addProduct(p5);
+        w.addProduct(p6);
+        w.addProduct(p7);
+        w.addProduct(p8);
+        w.addProduct(p9);
+
+    List<ProductRecord> expectedList = new ArrayList<>();
+    expectedList.add(p6); // 27/9
+    expectedList.add(p2); // 11/9
+    expectedList.add(p8); // 10/9
+    expectedList.add(p5); // 1/
+
+
+
+    assertThat(w.getMostPopularProducts(LocalDate.of(2023,9,1)))
+            .isNotSameAs(expectedList)
+            .containsExactlyElementsOf(expectedList);
+    }
+
+    @Test
+    public void getMostPopularProductsReturnEmptyListWhenNoProductsAreFound() {
+        Warehouse w = new Warehouse();
+        ProductRecord p1 = new ProductRecord(1, "Jeans", Category.CLOTHES, 5,
+                LocalDate.of(2023, 9, 11),
+                LocalDate.of(2023, 9, 14));
+
+        ProductRecord p2 = new ProductRecord(2, "Bear", Category.ANIMALS, 10,
+                LocalDate.of(2023, 9, 11),
+                LocalDate.of(2023, 9, 15));
+
+        ProductRecord p3 = new ProductRecord(3, "Dog", Category.ANIMALS, 10,
+                LocalDate.of(2023, 8, 10),
+                LocalDate.of(2023, 8, 12));
+
+        ProductRecord p4 = new ProductRecord(4, "Airplane", Category.VEHICLES, 3,
+                LocalDate.of(2022, 3, 9),
+                LocalDate.of(2022, 4, 18));
+
+        assertThat(w.getMostPopularProducts(LocalDate.of(2023, 1, 1)))
+                .isEmpty();
+
     }
 
 }

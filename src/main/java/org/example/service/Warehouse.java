@@ -5,6 +5,7 @@ import org.example.entities.Product;
 import org.example.entities.ProductRecord;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
 
 import static org.example.service.Queries.*;
@@ -47,4 +48,15 @@ public class Warehouse {
     public List<String> getCategories() {return findExistingCategories(products);}
 
     public Map<String, Long> getFirstLetters() {return countFirstCharacterOccurrence(products);}
+
+    public List<ProductRecord> getMostPopularProducts(LocalDate date) {
+
+        return products.stream()
+                .filter(product -> product.getRating() == 10)
+                .filter(product -> product.getCreatedAt().getMonth() == date.getMonth())
+                .sorted(Comparator.comparing(Product::getCreatedAt).reversed())
+                .map(ProductRecord::new)
+                .toList();
+    }
+
 }
