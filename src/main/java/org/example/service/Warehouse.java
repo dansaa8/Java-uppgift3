@@ -55,5 +55,4 @@ public class Warehouse {
     public List<ProductRecord> getProductsWithHighestRating(LocalDate date) {
         return findProductsWithHighestRatingThisMonth(products, date);
     }
-
 }

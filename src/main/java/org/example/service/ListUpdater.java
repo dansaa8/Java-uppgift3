@@ -46,5 +46,4 @@ public class ListUpdater {
                         product.getName().equalsIgnoreCase(p.name())
                 );
     }
-
 }

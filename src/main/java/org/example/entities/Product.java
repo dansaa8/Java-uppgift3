@@ -97,7 +97,5 @@ public final class Product {
     public int hashCode() {
         return Objects.hash(id, name, category, rating, createdAt, lastModified);
     }
-
-
 }
 

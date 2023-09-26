@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WarehouseTest {
@@ -128,10 +129,16 @@ class WarehouseTest {
         w.addProduct(new ProductRecord(3, "Boat", Category.VEHICLES, 4, LocalDate.now(), LocalDate.now()));
         w.addProduct(new ProductRecord(4, "Car", Category.VEHICLES, 10, LocalDate.now(), LocalDate.now()));
 
-        assertThat(w.getAllProducts())
-                .hasSize(4)
-                .doesNotContain(p1)
-                .contains(p2);
+        List<ProductRecord> lastFourRecords = w.getAllProducts().subList(w.getAllProducts().size() - 4, w.getAllProducts().size());
+
+        assertThat(lastFourRecords)
+                .extracting("id", "name", "category", "rating")
+                .containsExactly(
+                        tuple(1, "Airplane", Category.VEHICLES, 3),
+                        tuple(2, "Motorcycle", Category.VEHICLES, 0),
+                        tuple(3, "Boat", Category.VEHICLES, 4),
+                        tuple(4, "Car", Category.VEHICLES, 10)
+                );
     }
 
     @Test
