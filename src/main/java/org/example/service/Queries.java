@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
-final class Filters {
-    private Filters(){};
+final class Queries {
+    private Queries(){};
 
     static List<ProductRecord> getProductsInCategory(List<Product> products, Category category) {
         return products.stream()
@@ -41,4 +41,10 @@ final class Filters {
                 .orElse(null);
     }
 
+    static List<String> findExistingCategories(List<Product> pList) {
+        return pList.stream()
+                .map(p -> p.getCategory().toString())
+                .distinct()
+                .toList();
+    }
 }

@@ -6,9 +6,8 @@ import org.example.entities.ProductRecord;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static org.example.service.Filters.*;
+import static org.example.service.Queries.*;
 import static org.example.service.ListUpdater.*;
 
 public class Warehouse {
@@ -35,7 +34,7 @@ public class Warehouse {
     }
 
     public List<ProductRecord> getAllProducts(Category desiredCategory) {
-        return Filters.getProductsInCategory(products, desiredCategory);
+        return Queries.getProductsInCategory(products, desiredCategory);
     }
 
     public List<ProductRecord> getAllProducts(DateField desiredDateField, LocalDate targetDate) {
@@ -45,11 +44,5 @@ public class Warehouse {
             return getProductsLastModifiedAfterDesiredDate(products,targetDate);
     }
 
-    public List<String> getCategories() {
-                List<String> existingCategories = products.stream()
-                        .map(p -> p.getCategory().toString()) // Extrahera enum field och gör till String
-                        .distinct() // Tar bort duplicates
-                        .toList();
-        return existingCategories;
-    }
+    public List<String> getCategories() {return findExistingCategories(products);}
 }
