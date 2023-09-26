@@ -356,4 +356,70 @@ class WarehouseTest {
                 .isEmpty();
     }
 
+    @Test
+    public void getAMapWithEveryProductStartingLetterAndCountOccurences() {
+        Warehouse w = new Warehouse();
+
+        ProductRecord p1 = new ProductRecord(4, "Jeans", Category.CLOTHES, 5,
+                LocalDate.of(2023, 1, 11),
+                LocalDate.of(2023, 1, 14));
+
+        ProductRecord p2 = new ProductRecord(2, "Bear", Category.ANIMALS, 7,
+                LocalDate.of(2023, 2, 11),
+                LocalDate.of(2023, 5, 15));
+
+        ProductRecord p3 = new ProductRecord(3, "Dog", Category.ANIMALS, 5,
+                LocalDate.of(2023, 2, 10),
+                LocalDate.of(2023, 3, 12));
+
+        ProductRecord p4 = new ProductRecord(1, "Airplane", Category.VEHICLES, 3,
+                LocalDate.of(2023, 1, 9),
+                LocalDate.of(2023, 2, 18));
+
+        ProductRecord p5 = new ProductRecord(7, "Cat", Category.ANIMALS, 5,
+                LocalDate.of(2023, 3, 1),
+                LocalDate.of(2023, 3, 13));
+
+        ProductRecord p6 = new ProductRecord(5, "Alligator", Category.ANIMALS, 5,
+                LocalDate.of(2023, 2, 11),
+                LocalDate.of(2023, 3, 15));
+
+        ProductRecord p7 = new ProductRecord(3, "Dragon", Category.ANIMALS, 5,
+                LocalDate.of(2023, 2, 10),
+                LocalDate.of(2023, 3, 12));
+
+        ProductRecord p8 = new ProductRecord(3, "Dell", Category.COMPUTERS, 5,
+                LocalDate.of(2023, 2, 10),
+                LocalDate.of(2023, 3, 12));
+
+        ProductRecord p9 = new ProductRecord(3, "Jetplane", Category.VEHICLES, 5,
+                LocalDate.of(2023, 2, 10),
+                LocalDate.of(2023, 3, 12));
+
+        w.addProduct(p1);
+        w.addProduct(p2);
+        w.addProduct(p3);
+        w.addProduct(p4);
+        w.addProduct(p5);
+        w.addProduct(p6);
+        w.addProduct(p7);
+        w.addProduct(p8);
+        w.addProduct(p9);
+
+        assertThat(w.getFirstLetters())
+                .containsEntry("A", 2L)
+                .containsEntry("B", 1L)
+                .containsEntry("C", 1L)
+                .containsEntry("D", 3L)
+                .containsEntry("J", 2L);
+    }
+
+    @Test
+    public void getMapWithEveryProductLetterReturnEmptyMapIfNoProductsArePresent() {
+        Warehouse w = new Warehouse();
+
+        assertThat(w.getFirstLetters())
+                .isEmpty();
+    }
+
 }

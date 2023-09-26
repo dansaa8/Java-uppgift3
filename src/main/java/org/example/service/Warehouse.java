@@ -6,6 +6,7 @@ import org.example.entities.ProductRecord;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.example.service.Queries.*;
 import static org.example.service.ListUpdater.*;
@@ -45,4 +46,14 @@ public class Warehouse {
     }
 
     public List<String> getCategories() {return findExistingCategories(products);}
+
+    public Map<String, Long> getFirstLetters() {
+        return products.stream()
+                    .map(p -> p.getName().toUpperCase())
+                    .collect(Collectors.groupingBy(
+                            str -> str.substring(0, 1),
+                            TreeMap::new,
+                            Collectors.counting()
+                    ));
+    }
 }
