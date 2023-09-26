@@ -1,12 +1,10 @@
 package org.example.service;
 
-import org.assertj.core.api.Condition;
 import org.example.entities.Category;
 import org.example.entities.ProductRecord;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -484,7 +482,7 @@ class WarehouseTest {
 
 
 
-    assertThat(w.getMostPopularProducts(LocalDate.of(2023,9,1)))
+    assertThat(w.getProductsWithHighestRating(LocalDate.of(2023,9,1)))
             .isNotSameAs(expectedList)
             .containsExactlyElementsOf(expectedList);
     }
@@ -508,7 +506,7 @@ class WarehouseTest {
                 LocalDate.of(2022, 3, 9),
                 LocalDate.of(2022, 4, 18));
 
-        assertThat(w.getMostPopularProducts(LocalDate.of(2023, 1, 1)))
+        assertThat(w.getProductsWithHighestRating(LocalDate.of(2023, 1, 1)))
                 .isEmpty();
 
     }

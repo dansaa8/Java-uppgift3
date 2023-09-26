@@ -60,4 +60,13 @@ final class Queries {
                         Collectors.counting()
                 ));
     }
+
+    static List<ProductRecord> findProductsWithHighestRatingThisMonth(List<Product> pList, LocalDate date) {
+        return pList.stream()
+                .filter(product -> product.getRating() == 10)
+                .filter(product -> product.getCreatedAt().getMonth() == date.getMonth())
+                .sorted(Comparator.comparing(Product::getCreatedAt).reversed())
+                .map(ProductRecord::new)
+                .toList();
+    }
 }
