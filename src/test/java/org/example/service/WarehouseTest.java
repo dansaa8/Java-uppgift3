@@ -316,7 +316,44 @@ class WarehouseTest {
         LocalDate targetDate = LocalDate.of(2023, 3, 12);
 
         assertThat(w.getAllProducts(DateField.LAST_MODIFIED, targetDate))
-                .as("Method should return all products after a give creation-date.")
+                .as("Method should return all products after a given creation-date.")
                 .contains(p2, p5, p6);
     }
+
+    @Test
+    public void getCategoriesThatHasAtleastOneProductInProductsList() {
+        Warehouse w = new Warehouse();
+
+        ProductRecord p1 = new ProductRecord(1, "Bear", Category.ANIMALS, 7,
+                LocalDate.of(2023, 2, 11),
+                LocalDate.of(2023, 5, 15));
+
+        ProductRecord p2 = new ProductRecord(2, "Dog", Category.ANIMALS, 5,
+                LocalDate.of(2023, 2, 10),
+                LocalDate.of(2023, 3, 12));
+
+        ProductRecord p3 = new ProductRecord(3, "Laptop", Category.COMPUTERS, 5,
+                LocalDate.of(2023, 2, 10),
+                LocalDate.of(2023, 3, 12));
+
+        w.addProduct(p1);
+        w.addProduct(p2);
+        w.addProduct(p3);
+
+        assertThat(w.getCategories())
+                .as("List should contain following categories: ANIMALS, COMPUTERS")
+                .contains("ANIMALS", "COMPUTERS")
+                .hasSize(2)
+                .doesNotContain("VEHICLES", "CLOTHES");
+    }
+
+    @Test
+    public void emptyProductListInWarehouseReturnEmptyCategoryList() {
+        Warehouse w = new Warehouse();
+
+        assertThat(w.getCategories())
+                .as("Should return an empty list of categories when no products are present")
+                .isEmpty();
+    }
+
 }
