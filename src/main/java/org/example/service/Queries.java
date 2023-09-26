@@ -5,6 +5,9 @@ import org.example.entities.*;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 final class Queries {
     private Queries(){};
@@ -46,5 +49,15 @@ final class Queries {
                 .map(p -> p.getCategory().toString())
                 .distinct()
                 .toList();
+    }
+
+    static Map<String, Long> countFirstCharacterOccurrence(List<Product> pList) {
+        return pList.stream()
+                .map(p -> p.getName().toUpperCase())
+                .collect(Collectors.groupingBy(
+                        str -> str.substring(0, 1),
+                        TreeMap::new,
+                        Collectors.counting()
+                ));
     }
 }
