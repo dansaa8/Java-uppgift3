@@ -138,7 +138,9 @@ class WarehouseTest {
         w.addProduct(new ProductRecord(3, "Boat", Category.VEHICLES, 4, LocalDate.now(), LocalDate.now()));
         w.addProduct(new ProductRecord(4, "Car", Category.VEHICLES, 10, LocalDate.now(), LocalDate.now()));
 
-        List<ProductRecord> lastFourRecords = w.getAllProducts().subList(w.getAllProducts().size() - 4, w.getAllProducts().size());
+        List<ProductRecord> lastFourRecords = w.getAllProducts()
+                .subList(w.getAllProducts().size() - 4,
+                        w.getAllProducts().size());
 
         assertThat(lastFourRecords)
                 .extracting("id", "name", "category", "rating")
@@ -234,7 +236,7 @@ class WarehouseTest {
 
         Category targetType = Category.ANIMALS;
 
-        assertThat(w.getAllProducts(targetType))
+        assertThat(w.getProductsByCategory(targetType))
                 .as("Should contain 4 products (p2, p3, p5, p6), " +
                         "sorted in alphabetic order by name:" +
                         " p6(Alligator), p2(Bear), p5(Cat), p3(Dog)")
@@ -249,7 +251,7 @@ class WarehouseTest {
     public void getAllProductsWithACategoryThatDoesntExistReturnEmptyList() {
         Warehouse w = new Warehouse();
 
-        assertThat(w.getAllProducts(Category.CLOTHES))
+        assertThat(w.getProductsByCategory(Category.CLOTHES))
                 .as("Should return an empty list")
                 .isEmpty();
     }
@@ -291,7 +293,7 @@ class WarehouseTest {
 
         LocalDate targetDate = LocalDate.of(2023, 5, 10);
 
-        assertThat(w.getAllProducts(DateField.CREATED_AT, targetDate))
+        assertThat(w.getProductsCreatedAfterDate(targetDate))
                 .as("Method should return all products after a give creation-date.")
                 .contains(p1, p2, p4);
     }
@@ -333,7 +335,7 @@ class WarehouseTest {
 
         LocalDate targetDate = LocalDate.of(2023, 3, 12);
 
-        assertThat(w.getAllProducts(DateField.LAST_MODIFIED, targetDate))
+        assertThat(w.getProductsModifiedAfterDate(targetDate))
                 .as("Method should return all products after a given creation-date.")
                 .contains(p2, p5, p6);
     }
@@ -358,7 +360,7 @@ class WarehouseTest {
         w.addProduct(p2);
         w.addProduct(p3);
 
-        assertThat(w.getCategories())
+        assertThat(w.getExistingCategories())
                 .as("List should contain following categories: ANIMALS, COMPUTERS")
                 .containsSequence("ANIMALS", "COMPUTERS")
                 .hasSize(2)
@@ -369,7 +371,7 @@ class WarehouseTest {
     public void emptyProductListInWarehouseReturnEmptyCategoryList() {
         Warehouse w = new Warehouse();
 
-        assertThat(w.getCategories())
+        assertThat(w.getExistingCategories())
                 .as("Should return an empty list of categories when no products are present")
                 .isEmpty();
     }
