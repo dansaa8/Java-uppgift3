@@ -1,6 +1,6 @@
 package org.example.service;
 
-public enum DateField {
+enum DateField {
     CREATED_AT,
     LAST_MODIFIED,
 }
