@@ -87,6 +87,15 @@ class WarehouseTest {
     }
 
     @Test
+    void addProductWithTheSameIDReturnFalse() {
+        ProductRecord p1 = new ProductRecord(1, "Bird", Category.ANIMALS, 5, LocalDate.now(), LocalDate.now());
+        ProductRecord p2 = new ProductRecord(1, "Monkey", Category.ANIMALS, 3, LocalDate.now(), LocalDate.now());
+        Warehouse w = new Warehouse();
+        assertEquals(true, w.addProduct(p1));
+        assertEquals(false, w.addProduct(p2));
+    }
+
+    @Test
     void modifyNullProductReturnFalse() {
         ProductRecord p = null;
         Warehouse w = new Warehouse();

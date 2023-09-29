@@ -33,7 +33,7 @@ public class ListUpdater {
     }
 
     static boolean insertIntoList(List<Product> pList, ProductRecord p) {
-        if (isValid(p) && !nameExists(pList, p)) {
+        if (isValid(p) && !nameExists(pList, p) && !idExists(pList, p)) {
             pList.add(new Product(p));
             return true;
         }
@@ -44,6 +44,13 @@ public class ListUpdater {
         return pList.stream()
                 .anyMatch(product ->
                         product.getName().equalsIgnoreCase(p.name())
+                );
+    }
+
+    private static boolean idExists(List<Product> pList, ProductRecord p) {
+        return pList.stream()
+                .anyMatch(product ->
+                        product.getId() == p.id()
                 );
     }
 
