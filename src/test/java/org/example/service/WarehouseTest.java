@@ -55,9 +55,9 @@ class WarehouseTest {
 
     @Test
     void addProductWithRatingBetween0And10ReturnTrue() {
-        ProductRecord p1 = new ProductRecord(0, "Motorcycle", Category.VEHICLES, 0, LocalDate.now(), LocalDate.now());
-        ProductRecord p2 = new ProductRecord(0, "Boat", Category.VEHICLES, 4, LocalDate.now(), LocalDate.now());
-        ProductRecord p3 = new ProductRecord(0, "Car", Category.VEHICLES, 10, LocalDate.now(), LocalDate.now());
+        ProductRecord p1 = new ProductRecord(1, "Motorcycle", Category.VEHICLES, 0, LocalDate.now(), LocalDate.now());
+        ProductRecord p2 = new ProductRecord(2, "Boat", Category.VEHICLES, 4, LocalDate.now(), LocalDate.now());
+        ProductRecord p3 = new ProductRecord(3, "Car", Category.VEHICLES, 10, LocalDate.now(), LocalDate.now());
         Warehouse w = new Warehouse();
         assertEquals(true, w.addProduct(p1));
         assertEquals(true, w.addProduct(p2));
@@ -386,7 +386,7 @@ class WarehouseTest {
                 LocalDate.of(2023, 2, 11),
                 LocalDate.of(2023, 5, 15));
 
-        ProductRecord p3 = new ProductRecord(3, "Dog", Category.ANIMALS, 5,
+        ProductRecord p3 = new ProductRecord(11, "Dog", Category.ANIMALS, 5,
                 LocalDate.of(2023, 2, 10),
                 LocalDate.of(2023, 3, 12));
 
@@ -406,11 +406,11 @@ class WarehouseTest {
                 LocalDate.of(2023, 2, 10),
                 LocalDate.of(2023, 3, 12));
 
-        ProductRecord p8 = new ProductRecord(3, "Dell", Category.COMPUTERS, 5,
+        ProductRecord p8 = new ProductRecord(9, "Dell", Category.COMPUTERS, 5,
                 LocalDate.of(2023, 2, 10),
                 LocalDate.of(2023, 3, 12));
 
-        ProductRecord p9 = new ProductRecord(3, "Jetplane", Category.VEHICLES, 5,
+        ProductRecord p9 = new ProductRecord(10, "Jetplane", Category.VEHICLES, 5,
                 LocalDate.of(2023, 2, 10),
                 LocalDate.of(2023, 3, 12));
 
